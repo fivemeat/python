@@ -1,2 +1,77 @@
-#引入pyautogui
 import pyautogui as pg
+import time
+
+#鼠标参数
+#获取屏幕分辨率
+print(pg.size())#输出显示器分辨率
+width,height = pg.size()
+print(width,height)
+
+#鼠标移动事件
+pg.moveTo(100,300,1) #一个坐标，一个1称的时间。
+
+#鼠标位置,加到while 循环内，再配个时间，就能实时收到鼠标的位置信息。
+i=1
+while i <10000:
+    print(pg.position())#单独这一句，就能获取当前鼠标的位置
+    time.sleep(1)
+    i +=1
+
+
+
+# 默认这项功能为True, 这项功能意味着：当鼠标的指针在屏幕的最坐上方，程序会报错；目的是为了防止程序无法停止
+pg.FAILSAFE =False
+
+# 意味着所有pg的指令都要暂停一秒；其他指令不会停顿；这样做，可以防止键盘鼠标操作太快；
+pg.PAUSE = 1
+
+##----------------------鼠标事件---------------------##
+# 点击鼠标
+pg.click(10,10)   # 鼠标点击指定位置，默认左键
+pg.click(10,10,button='left')  # 单击左键
+pg.click(1000,300,button='right')  # 单击右键
+pg.click(1000,300,button='middle')  # 单击中间
+
+pg.doubleClick(10,10)  # 指定位置，双击左键
+pg.rightClick(10,10)   # 指定位置，双击右键
+pg.middleClick(10,10)  # 指定位置，双击中键
+
+pg.mouseDown()   # 鼠标按下
+pg.mouseUp()    # 鼠标释放
+
+# 拖动到指定位置
+# 将鼠标拖动到指定的坐标；duration 的作用是设置移动时间，所有的gui函数都有这个参数，而且都是可选参数
+pg.dragTo(100,300,duration=1)
+
+# 按方向拖动
+# 向右拖动100px，向下拖动500px, 这个过程持续 1 秒钟
+pg.dragRel(100,500,duration=4)   # 第一个参数是左右移动像素值，第二个是上下
+
+# 控制鼠标滚动的函数是scroll()， 传入一个整数的参数，说明向上或向下滚动多少个单位；单位根据操作系统不同而不同
+pg.scroll(300)  # 向下滚动300个单位；
+
+##---------------------键盘事件-------------------##
+pg.keyDown() #： 模拟按键按下；
+pg.keyUp() #： 模拟按键释放；
+pg.press() #： # 就是调用keyDown() & keyUp(),模拟一次按键；
+pg.typewrite('this',0.5)# ： 第一参数是输入内容，第二个参数是每个字符间的间隔时间；
+pg.typewrite(['T','h','i','s'])#：typewrite 还可以传入单字母的列表；
+
+pg.keyDown('shift')    # 按下shift
+pg.press('4')    # 按下 4
+pg.keyUp('shift')   # 释放 shift
+
+pg.typewrite('$*……%……￥', 0.5)#这个可以输出长字符串
+pg.typewrite(['T','i','s','left','left','h',])   # 输出：This
+
+#实现复制粘贴
+pg.keyDown('ctrl')
+pg.keyDown('c')
+pg.keyUp('c')
+pg.keyUp('ctrl')
+pg.hotkey('ctrl','c')
+
+
+
+
+
